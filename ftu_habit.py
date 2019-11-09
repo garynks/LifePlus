@@ -1,5 +1,8 @@
 from tkinter import *
 
+# Initializing the habits 2d array
+habits = list()
+
 
 def habit_entry():
     # Initializing the window
@@ -26,11 +29,10 @@ def habit_entry():
 
 
 def habit_storage():
-    # Retrieving the user habit entry and 2d
+    # Retrieving the user habit entry and add to 2-d array
     habit_str = habit.get()
-    habits = list()
     index = 1
-    habits.insert(1, habit_str)
+    habits.insert(index, habit_str)
 
 
 def display():
