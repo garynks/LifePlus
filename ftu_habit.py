@@ -1,29 +1,36 @@
 from tkinter import *
-import os
 
 
 def habit_entry():
-
+    # Initializing the window
     habit_screen = Tk()
-    habit_screen.geometry("550x300")
+    habit_screen.geometry("600x300")
     habit_screen.title("New Habit Entry")
     Label(text="How would you like to achieve it?", font=("Calibri", 30)).pack()
     Label(text=" ").pack()
 
-    habit = Entry(habit_screen, width = 50)
-    habit.pack()
+    # Getting user input
+    global habit
+    habit = StringVar()
+
+    # Add an entry box for user input
+    Entry(habit_screen, width = 50, font = ("Calibri", 15), textvariable = habit).pack()
     Label(text=" ").pack()
 
+    # Adding buttons for user to proceed to next step
     Button(habit_screen, text = "Add another habit", font=("Calibri", 15), command = habit_storage).pack()
     Label(text=" ").pack()
     Button(habit_screen, text = "Finish adding", font=("Calibri", 15), command = display).pack()
-
 
     habit_screen.mainloop()
 
 
 def habit_storage():
-    habits_list = list()
+    # Retrieving the user habit entry and 2d
+    habit_str = habit.get()
+    habits = list()
+    index = 1
+    habits.insert(1, habit_str)
 
 
 def display():
