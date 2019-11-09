@@ -5,8 +5,6 @@ def change_frame(arg = None):
     a = e.get()
     print(a)  # change this code to pass this value to next frame
 
-name = ""
-
 screen = Tk()
 screen.geometry("550x300")
 screen.title("title_page")
