@@ -1,5 +1,6 @@
 from tkinter import *
-from saved import Saved
+from Saved import Saved
+from tkinter.ttk import *
 
 saving = Saved()    # Saved is a class by Mari to store goals and habits
 
@@ -120,6 +121,22 @@ class ProgressPage(Frame):
     def __init__(self, master):
         self.master = master
         Frame.__init__(self, master)
+        
+        self.progress = 0                                                  # stores the starting value of progress
+        self.step = 50                                                             # amount by which the progress bar increases
+        self.Progressbar = Progressbar(mode="determinate", value = self.progress, variable="")
+        self.Progressbar.pack()
+        Button(self, text="+", command=self.IncrementProg).pack()        
+        
+    def IncrementProg(self):
+        if self.progress + self.step < 100:
+            self.Progressbar.step(self.step)
+            self.progress += self.step
+            #Label(self.progress)
+            
+        else:
+            self.Progressbar.step(99.9-self.progress)
+            self.progress = 100                
 
 
 
