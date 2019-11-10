@@ -100,7 +100,7 @@ class HabitEntry(Frame):
         Label(self, text="What are some habits that you want to achieve to fulfill this goal?",
               font=("Calibri", 20)).pack(side="top", pady=5)
         self.add_habit()
-        Button(self, text="Add another habit", command=self.add_habit).pack(side="bottom", pady=10)
+        # Button(self, text="Add another habit", command=self.add_habit).pack(side="bottom", pady=10)
 
     def store_habit(self):
         self.habit = self.habit_str.get()
@@ -123,9 +123,9 @@ class DisplayGoalAndHabits(Frame):
         Frame.__init__(self, master)
 
         with open("saved.txt", "r") as f:
-            Label(self, text=f.read()).pack(side="left", fill="x")
+            Label(self, text=f.read()).pack(side="left", fill="x", pady = 10, padx = 10)
 
-        Button(self, text="View Progress", command=lambda: self.master.switch_frame(ProgressPage)).pack(side="right")
+        Button(self, text="View Progress", command=lambda: self.master.switch_frame(ProgressPage)).pack(side="right", pady = 10, padx = 10)
 
 
 """Display progress page"""
@@ -142,6 +142,7 @@ class ProgressPage(Frame):
         self.Progressbar.pack(pady = 10)
         Button(self, text="+", command=self.IncrementProg).pack()
         Label(self, text = " ").pack()
+        self.quit()
 
     def IncrementProg(self):
         if self.progress + self.step < 100:
@@ -156,7 +157,12 @@ class ProgressPage(Frame):
 
     def success_message(self):
         if self.progress >= 99.9:
-            Label(self, text = "Congratulations! You have successfully finished a habit!", font = ("Calibri", 13)).pack(pady = 10)
+            Label(self, text = "Congratulations! You have successfully finished a habit!", font = ("Calibri", 13)).pack(pady = 20)
+
+    def quit(self):
+        Button(self, text = "Quit", command = exit).pack()
+
+
 
 
 if __name__ == "__main__":
