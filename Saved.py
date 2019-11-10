@@ -71,9 +71,10 @@ class Saved:
 
         return goals
 
-    def savehabits(self,goal,habit,repeats):  # variable for single integer
+    def savehabits(self,goal,habit):  # variable for single integer
         f = open("saved.txt", "r")
         data = f.readlines()
+        repeats = 10  # assume each habits are repeated 10 times
         habit_line = 0  # saves which line I should write the habit on
         numberthehab = True # True or False depending on whether i need to number the habit to its goal or not
 
