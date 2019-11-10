@@ -24,22 +24,22 @@ class StartPage(Frame):
 
 
 class GoalEntry(Frame):
+
     def __init__(self, master):
-        self.goal = None
         self.master = master
+        self.goal_str = StringVar()
+        self.goal = None
 
         Frame.__init__(self, master)
         Label(self, text = "What is your goal?", font = ("Calibri", 20)).pack(side="top", fill="x", pady=5)
-        Entry(self, width = 50).pack()
+        Entry(self, width = 50, textvariable = self.goal_str).pack()
         Label(text=" ").pack()
-        Button(self, text = "Plan your goal!", command = lambda: master.switch_frame(HabitEntry)).pack()
+        Button(self, text = "Plan your goal!", command = self.store_goal).pack()
 
     def store_goal(self):
-        goal = StringVar()
-        goal.get()
-        self.goal = goal
-        # self.master(switch_frame(HabitEntry))
-
+        self.goal = self.goal_str.get()
+        print(self.goal, "is the goal!")
+        self.master.switch_frame(HabitEntry)
 
 
 class HabitEntry(Frame):
