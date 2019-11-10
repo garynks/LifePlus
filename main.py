@@ -79,7 +79,7 @@ class HabitEntry(Frame):
         self.habit = None
 
         Frame.__init__(self, master)
-        Label(self, text="How would you like to achieve it?", font=("Calibri", 20)).pack(side="top", pady=5)
+        Label(self, text="What are some habits that you want to achieve to fulfill this goal?", font=("Calibri", 20)).pack(side="top", pady=5)
         self.add_habit()
         Button(self, text = "Add another habit", command = self.add_habit).pack(side = "bottom", pady=10)
 
@@ -104,6 +104,8 @@ class DisplayGoalAndHabits(Frame):
 
         with open("saved.txt", "r") as f:
             Label(self, text = f.read()).pack(side = "left", fill = "x")
+
+        Button(self, text = "View Progress", command = lambda: self.master.switch_frame(ProgressPage)).pack(side = "right")
 
         # while the end of file is not reached
         # print the goals and habits as labels
