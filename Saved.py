@@ -121,12 +121,12 @@ class Saved:
 
         return return_list
 
-    def saveprgrs(self,goal,lastten,progress):
+    def saveprgrs(self,goal,lastfive,progress):
         f = open("saved.txt", "r")
         data = f.readlines()
         prog_line = 0  # saves which line I should write the progress on
         start = 0 # where to search the start from
-        total = int(lastten[9]) # last char should be the total number to count progress from
+        total = 10 # total is just 10
 
         for i in range(len(data)):
             if (str(goal) + '\n') in data[i]:
@@ -138,7 +138,7 @@ class Saved:
             next_goal += 1  # at the end it should give the line to stop the search at
 
         for i in range(start, next_goal+1):
-            if lastten in data[i]:
+            if lastfive in data[i]:
                 prog_line = i + 1
 
         if data[prog_line][1] != '\t':  # if progress doesn't already exist
@@ -150,12 +150,12 @@ class Saved:
         f = open("saved.txt", "w")
         f.writelines(data)
 
-    def loadprgrs(self,goal,lastten):
+    def loadprgrs(self,goal,lastfive):
         f = open("saved.txt", "r")
         data = f.readlines()
         prog_line = 0  # saves which line I should write the progress on
         start = 0 # where to search the start from
-        total = int(lastten[9]) # last char should be the total number to count progress from
+        total = 10 # total is just 10
 
         for i in range(len(data)):
             if (str(goal) + '\n') in data[i]:
@@ -167,7 +167,7 @@ class Saved:
             next_goal += 1  # at the end it should give the line to stop the search at
 
         for i in range(start, next_goal+1):
-            if lastten in data[i]:  # if i find the habit
+            if lastfive in data[i]:  # if i find the habit
                 prog_line = i + 1  # line after that is where the progress is written
 
         progress =  data[prog_line][12:]  # this is after Progress:
