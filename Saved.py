@@ -13,6 +13,7 @@ class Saved:
 
     def makefile(self):
         f = open("saved.txt","w+")
+        g = open("progress.txt", "w+")
         f.write("Name:\n\nGoals:\nHabits:\n")
 
     def savename(self,text):
@@ -146,11 +147,11 @@ class Saved:
         else:
             data[prog_line] = ('\t\t' +'Progress: ' + str(progress)+'\n')  # just replace the progress part
 
-        f = open("saved.txt", "w")
+        f = open("progress.txt", "w")
         f.writelines(data)
 
     def loadprgrs(self,goal,lastfive):
-        f = open("saved.txt", "r")
+        f = open("progress.txt", "r")
         data = f.readlines()
         prog_line = 0  # saves which line I should write the progress on
         start = 0 # where to search the start from
