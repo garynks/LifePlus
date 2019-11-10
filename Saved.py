@@ -126,7 +126,6 @@ class Saved:
         data = f.readlines()
         prog_line = 0  # saves which line I should write the progress on
         start = 0 # where to search the start from
-        total = 10 # total is just 10
 
         for i in range(len(data)):
             if (str(goal) + '\n') in data[i]:
@@ -142,10 +141,10 @@ class Saved:
                 prog_line = i + 1
 
         if data[prog_line][1] != '\t':  # if progress doesn't already exist
-            data.insert(prog_line,('\t\t' +'Progress: ' + str(progress)+'/'+str(total)+ '\n'))
-            # example output : (double tab)Progress: 2/4
+            data.insert(prog_line,('\t\t' +'Progress: ' + str(progress)+'\n'))
+            # example output : (double tab)Progress: 20
         else:
-            data[prog_line] = ('\t\t' +'Progress: ' + str(progress)+'/'+str(total)+ '\n')  # just replace the progress part
+            data[prog_line] = ('\t\t' +'Progress: ' + str(progress)+'\n')  # just replace the progress part
 
         f = open("saved.txt", "w")
         f.writelines(data)
@@ -155,7 +154,6 @@ class Saved:
         data = f.readlines()
         prog_line = 0  # saves which line I should write the progress on
         start = 0 # where to search the start from
-        total = 10 # total is just 10
 
         for i in range(len(data)):
             if (str(goal) + '\n') in data[i]:
@@ -170,6 +168,6 @@ class Saved:
             if lastfive in data[i]:  # if i find the habit
                 prog_line = i + 1  # line after that is where the progress is written
 
-        progress =  data[prog_line][12:]  # this is after Progress:
+        progress = data[prog_line][12:-1]  # this is after Progress:
 
-        return progress
+        return int(progress)
