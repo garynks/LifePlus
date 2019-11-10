@@ -13,7 +13,7 @@ class Saved:
 
     def makefile(self):
         f = open("saved.txt","w+")
-        f.write("Name:\n\nGoals:\nHabits:\n\n")
+        f.write("Name:\n\nGoals:\nHabits:\n")
 
     def savename(self,text):
         f = open("saved.txt","r")
@@ -66,4 +66,55 @@ class Saved:
             goals.append(data[goal_line])
             goal_line += 1
 
+        for i in range(len(goals)):
+            goals[i] = goals[i][:-1]
+
         return goals
+
+    def savehabits(self,goal,habit,repeats):  # variable for single integer
+        f = open("saved.txt", "r")
+        data = f.readlines()
+        habit_line = 0  # saves which line I should write the habit on
+        numberthehab = True # True or False depending on whether i need to number the habit to its goal or not
+
+        for i in range(len(data)):
+            if 'Habits:' in data[i]:
+                habit_line = i + 1
+
+        lineafter = habit_line # where I need to insert
+
+        while lineafter < len(data):
+            lineafter += 1  # lineafter then indicates the last index in data + 1 (out of index without adjustment)
+
+        for i in range(habit_line-1, lineafter-1):
+            if data[i] == str(goal)+'\n':  # if habit is already numbered
+                numberthehab = False  # don't need to make another one
+
+        if numberthehab:
+            data.insert(lineafter, str(goal)+'\n')
+            lineafter += 1
+
+        data.insert(lineafter,('\t' + habit + ' x ' + str(repeats) +'\n'))  # example output : 1. insert goal here (newline)
+
+        f = open("saved.txt", "w")
+        f.writelines(data)
+
+    def loadhabits(self,goal):
+        f = open("saved.txt", "r")
+        data = f.readlines()
+        habit_line = 0  # the habits I need to return
+        return_list = []
+
+        for i in range(len(data)):
+            if data[i] == str(goal)+'\n':
+                habit_line = i + 1
+
+        return_list.append(data[habit_line])  # first one always exist so append
+        while habit_line+1 < len(data) and data[habit_line+1][0] == '\t':
+            habit_line += 1
+            return_list.append(data[habit_line])
+
+        for i in range(len(return_list)):
+            return_list[i] = return_list[i][1:-1]
+
+        return return_list
