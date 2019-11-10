@@ -84,9 +84,11 @@ class DisplayGoalAndHabits(Frame):
     def __init__(self, master):
         self.master = master
         #   Read from file and display the content
-
-
-
+        #  Saved().loadgoals() return list of all the goals
+        #  Saved().loadhabits(goal) goal = int indicating the goal; returns list of habits for that goal
+        #  Saved().loadprgrs(goal,lastten) lastten is the last 10 char of habit -> could be written as habit[len(habit)-10:]
+        #       this will return a string fraction (eg '2/3') to indicate progress for that habit
+        
 
 if __name__ == "__main__":
     app = LifePlusApp()
